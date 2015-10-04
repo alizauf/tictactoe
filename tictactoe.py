@@ -1,21 +1,22 @@
-#update comments pre github
 ###THE BASICS
 
 #initial conditions
 board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 turn = 0
 move_counter = 0
-print ""
-print "#####################################"
-print "#                                   #"
-print "#                                   #"
-print "#      Welcome to TIC TAC TOE       #"
-print "#                                   #"
-print "#             by Aliza              #"
-print "#                                   #"
-print "#                                   #"
-print "#####################################"
-print ""
+def welcome():
+	print ""
+	print "#####################################"
+	print "#                                   #"
+	print "#                                   #"
+	print "#      Welcome to TIC TAC TOE       #"
+	print "#                                   #"
+	print "#             by Aliza              #"
+	print "#                                   #"
+	print "#                                   #"
+	print "#####################################"
+	print ""
+
 
 #This increments the turn
 def update_turn():
@@ -40,16 +41,22 @@ def go_first():
 		print "Dude. Come on."
 		go_first()
 	elif "y" in answer:
+		clear_screen()
 		print "Great, you'll go first."
+		print ""
 	else:
 		update_turn()
 #Note: this will mean that the computer only goes on odd turns
+		clear_screen()
 		print "Okay, the computer will go first"
+		print ""
 
 #This lets the human pick their letter
 def x_or_o():
 	def success1():
-		print "Okay, you'll be ",human_play_letter, "and the computer will be ",robot_play_letter
+		clear_screen()
+		print "Okay, you'll be",human_play_letter, "and the computer will be",robot_play_letter
+		print ""
 	global human_play_letter
 	global robot_play_letter
 	print "Would you like to be X or O?"
@@ -82,7 +89,9 @@ def smart_robot():
 		return ""
 	else:
 		challenge_level = int(answer)
-		print "Okay... Have fun!"
+		clear_screen()
+		print "Okay... Have fun playing at level", answer
+		print ""
 
 #this alters the board to add the human and robot moves. it turns 100 into the human's move letter and 600 into the robot's letter.
 def create_displayboard():
@@ -99,14 +108,24 @@ def create_displayboard():
 
 #This prints the calculated display board on the grid humans recognize	
 def print_board():
+	print ""
 	print " ", display_board[0], "|", display_board[1], "|", display_board[2]
 	print "--------------"
 	print " ", display_board[3], "|", display_board[4], "|", display_board[5]
 	print "--------------"
 	print " ", display_board[6], "|", display_board[7], "|", display_board[8]
 
+#to make it easier to look at the screen without seeing previous moves
+#from here: http://stackoverflow.com/questions/2084508/clear-terminal-in-python
+def clear_screen():
+	import os
+	os.system('cls' if os.name == 'nt' else 'clear')
+	
+
 #This runs the whole opening sequence.
 def opening():
+	clear_screen()
+	welcome()
 	go_first()
 	x_or_o()
 	smart_robot()
@@ -297,22 +316,32 @@ def whose_turn():
 		create_winsets()
 		create_sum()		
 		if 300 in sum_winsets:
+			clear_screen()
+			create_displayboard()
 			print ""
 			print "You win! The human wins!"
+			print ""
 			return "done"
 		elif 1800 in sum_winsets:
+			clear_screen()
+			create_displayboard()
 			print ""
 			print "You have been beaten at tic-tac-toe by a computer."
+			print ""
 			return "done"	
 		elif move_counter == 9:
+			clear_screen()
+			create_displayboard()
 			print ""
 			print "Tie. Cat's game. Meow."
+			print ""
 			return ""
 		elif turn % 2 == 0:
 			your_move()
+			clear_screen()
 		else:
 			robot_move()
-		create_displayboard()
+			create_displayboard()
 		update_turn()
 		update_move_counter()	
 			
