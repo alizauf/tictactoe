@@ -221,6 +221,7 @@ def line3():
 	#print sneaky3
 #flattens the list	
 	sneaky3_flat = sum(sneaky3, [])
+	
 	#print sneaky3_flat
 #leaves only the remaining spaces
 	sneaky4 = []
@@ -235,9 +236,14 @@ def line3():
 
 #this will just look for the first place available on the board, regardless of strategy
 def line4():
-	for x in range (0,4500):
-		if x in sum_winsets:
-			return sum_winsets.index(x)
+#horrible line of code to prevent corners attack	
+	if 7 not in board and 3 not in board and 1 in board and 2 in board and 4 in board and 6 in board and 8 in board and 9 in board:
+		return 1
+	else:
+		for x in range (0,4500):
+			if x in sum_winsets:
+				#print sum_winsets.index(x)
+				return sum_winsets.index(x)
 	
 
 #how the robot decides which line to act on. i left printing in for debugging if the wrong line was firing
